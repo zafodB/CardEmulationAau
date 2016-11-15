@@ -14,7 +14,7 @@ public class CardService extends HostApduService {
     @Override
     public byte[] processCommandApdu(byte[] commandApdu, Bundle extras) {
         Log.i(TAG, "Hura!");
-        return new byte[0];
+        return new byte[] {1,2,3,4,5,6,7,8};
     }
 
     @Override
