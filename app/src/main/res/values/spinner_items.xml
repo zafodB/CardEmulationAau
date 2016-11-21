@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_items2">
+        <item>Aalborg University</item>
+        <item>Fitness World</item>
+        <item>KAB</item>
+        <item>Other</item>
+
+    </string-array>
+</resources>

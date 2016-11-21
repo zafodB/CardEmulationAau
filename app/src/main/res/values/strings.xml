@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">CardEmulationAau</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- In "Add new Card" activity -->
+    <string name="name_hint">Name</string>
+    <string name="id_hint">ID: 01234567</string>
+    <string name="add_card">Add card</string>
+    <string name="spinner_prompt">Choose institution</string>
+    <string name="no_card_name_tst">Enter a name!</string>
+    <string name="name_too_long_tst">Card name is too long!</string>
+    <string name="no_card_number_tst">Enter a card number!</string>
+    <string name="number_too_long_tst">Card number is too long!</string>
+
+    <string-array name="spinner_items">
+        <item>Aalborg University</item>
+        <item>Fitness World</item>
+        <item>KAB</item>
+        <item>Other</item>
+
+    </string-array>
+
 </resources>
