@@ -7,6 +7,8 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="card_thumb_description">Company logo</string>
+
     <!-- In "Add new Card" activity -->
     <string name="name_hint">Name</string>
     <string name="id_hint">ID: 01234567</string>

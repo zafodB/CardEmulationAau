@@ -45,8 +45,6 @@ public class AddNewCardActivity extends AppCompatActivity {
                 String cardNumber = cardNumberField.getText().toString();
                 int institutionNumber = institutionChooser.getSelectedItemPosition();
 
-
-
                 if (cardName.isEmpty()){
                     isValid = false;
                     Toast.makeText(getApplicationContext(), getString(R.string.no_card_name_tst),Toast.LENGTH_LONG).show();
@@ -72,13 +70,18 @@ public class AddNewCardActivity extends AppCompatActivity {
                     String keyInstitution = "h2" + uuid.toString();
 
                     myEditor.putString(keyName, cardName);
+                    Log.i(TAG, "Key (name): " + keyName + ", value: " + cardName);
+
                     myEditor.putString(keyNumber, cardNumber);
+                    Log.i(TAG, "Key (#): " + keyNumber + ", value: " + cardNumber);
+
                     myEditor.putString(keyInstitution, String.valueOf(institutionNumber));
+                    Log.i(TAG, "Key(Institution): " + keyInstitution + ", value: " + String.valueOf(institutionNumber));
+
                     myEditor.commit();
 
                     finish();
                 }
-
             }
         });
     }

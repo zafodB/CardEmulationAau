@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +32,9 @@ public class RecyclerViewFragment extends Fragment {
 
     CustomAdapter myAdapter;
     RecyclerView mRecyclerView;
-//    String[] data = {"a", "b", "c","a", "b", "c","a", "b", "c","a", "b", "c","a", "b", "c","a", "b", "c","a", "b",
-// "c","x"};
 
     public static RecyclerViewFragment newInstance() {
         RecyclerViewFragment fragment = new RecyclerViewFragment();
-//        fragment.setRetainInstance(true);
         Log.i(TAG, "fragment instance created");
         return fragment;
     }
@@ -66,8 +64,6 @@ public class RecyclerViewFragment extends Fragment {
     }
 
     public void notifyAdapter() {
-        Log.i(TAG, "received notification");
-
         myAdapter.putCardData(getCardData());
 
         getActivity().runOnUiThread(new Runnable() {
@@ -76,14 +72,14 @@ public class RecyclerViewFragment extends Fragment {
                 myAdapter.notifyDataSetChanged();
             }
         });
-
     }
 
-    List<Map<String, ?>> getCardData() {
+    List<LinkedHashMap<String, ?>> getCardData() {
         SharedPreferences mySharedPref = getActivity().getSharedPreferences("Card Data", 0);
         Map<String, ?> dataMap = mySharedPref.getAll();
+
 //        Helper map to check, if UUID already was assigned to a number in the list.
-        Map<String, Integer> helperMap = new HashMap<>();
+        LinkedHashMap<String, Integer> helperMap = new LinkedHashMap<>();
 
 //        Helper list to store all data in temporarily.
         List<String> helperList = new ArrayList<>();
@@ -94,8 +90,10 @@ public class RecyclerViewFragment extends Fragment {
             helperList.add(i, "");
         }
 
+//        Process each line of data from memory separately, using this for loop
         for (Map.Entry<String, ?> entry : dataMap.entrySet()) {
             String key = entry.getKey();
+            Log.i(TAG, "Key is: " + key);
             String uuid = key.substring(2);
 
             boolean alreadyAssigned = false;
@@ -105,14 +103,17 @@ public class RecyclerViewFragment extends Fragment {
             for (Map.Entry<String, Integer> e : helperMap.entrySet()) {
                 if (e.getKey().equals(uuid)) {
                     alreadyAssigned = true;
-                } else {
-                    helpPos++;
+                    helpPos = e.getValue();
+                    break;
                 }
+                helpPos++;
             }
 
 //            If not, assign UUID place in final list.
             if (!alreadyAssigned) {
+//                helpPos++;
                 helperMap.put(uuid, count);
+                helpPos = count;
                 count++;
             }
 
@@ -127,25 +128,25 @@ public class RecyclerViewFragment extends Fragment {
                 helperList.remove(helpPos * 3 + 2);
                 helperList.add(helpPos * 3 + 2, entry.getValue().toString());
             }
-
         }
 
-        List<Map<String, ?>> dataList = new ArrayList<>();
+        List<LinkedHashMap<String, ?>> dataList = new ArrayList<>();
 
 //        Get data from temporary list to Output list
         for (int i = helperList.size() - 1; i >= 0; i = i - 3) {
-            Map<String, String> myMap = new HashMap<>();
+            LinkedHashMap<String, String> myMap = new LinkedHashMap<>();
             myMap.put("name", helperList.get(i - 2));
-            Log.i(TAG,"Put this name" + helperList.get(i-2) + ". From this place: " + String.valueOf(i-2) );
+//            Log.i(TAG,"Put this name: " + helperList.get(i-2) + ". From this place: " + String.valueOf(i-2) );
             myMap.put("id", helperList.get(i - 1));
-            Log.i(TAG,"Put this id" + helperList.get(i-1) + ". From this place: " + String.valueOf(i-1) );
+//            Log.i(TAG,"Put this id: " + helperList.get(i-1) + ". From this place: " + String.valueOf(i-1) );
             myMap.put("institution", helperList.get(i));
-            Log.i(TAG,"Put this institution" + helperList.get(i) + ". From this place: " + String.valueOf(i) );
+//            Log.i(TAG,"Put this institution: " + helperList.get(i) + ". From this place: " + String.valueOf(i) );
 
             dataList.add(myMap);
         }
 
-        Log.i(TAG, "The length of data is: " + String.valueOf(count));
+//        Log.i(TAG, "The length of data is: " + String.valueOf(count));
+//        Log.i(TAG,"");
 
         return dataList;
     }

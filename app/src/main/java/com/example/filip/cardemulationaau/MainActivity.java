@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-    public static final boolean WIPE_MEMORY = true;
+    public static final boolean WIPE_MEMORY = false;
 
     public static final String TAG = "myTag";
     static final String FRAGMENT_TAG = "cardFragment";
@@ -32,7 +32,6 @@ public class MainActivity extends Activity {
 
         getFragmentManager().beginTransaction().add(R.id.fragment, RecyclerViewFragment.newInstance(), FRAGMENT_TAG)
                 .commit();
-
         addCardButton = (FloatingActionButton) findViewById(R.id.fab);
 
         addCardButton.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +44,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume() {
-
         RecyclerViewFragment fragment = (RecyclerViewFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG);
-        Log.i(TAG, "tried to notify Fragment");
         fragment.notifyAdapter();
 
         super.onResume();
