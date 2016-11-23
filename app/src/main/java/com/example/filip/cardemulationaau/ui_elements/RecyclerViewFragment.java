@@ -1,11 +1,9 @@
-package com.example.filip.cardemulationaau;
+package com.example.filip.cardemulationaau.ui_elements;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.UiThread;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,8 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.filip.cardemulationaau.R;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +47,7 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.recycler_view_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recycler_view, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rec_view_holder);
 
@@ -93,7 +92,7 @@ public class RecyclerViewFragment extends Fragment {
 //        Process each line of data from memory separately, using this for loop
         for (Map.Entry<String, ?> entry : dataMap.entrySet()) {
             String key = entry.getKey();
-            Log.i(TAG, "Key is: " + key);
+//            Log.i(TAG, "Key is: " + key);
             String uuid = key.substring(2);
 
             boolean alreadyAssigned = false;
@@ -136,17 +135,11 @@ public class RecyclerViewFragment extends Fragment {
         for (int i = helperList.size() - 1; i >= 0; i = i - 3) {
             LinkedHashMap<String, String> myMap = new LinkedHashMap<>();
             myMap.put("name", helperList.get(i - 2));
-//            Log.i(TAG,"Put this name: " + helperList.get(i-2) + ". From this place: " + String.valueOf(i-2) );
             myMap.put("id", helperList.get(i - 1));
-//            Log.i(TAG,"Put this id: " + helperList.get(i-1) + ". From this place: " + String.valueOf(i-1) );
             myMap.put("institution", helperList.get(i));
-//            Log.i(TAG,"Put this institution: " + helperList.get(i) + ". From this place: " + String.valueOf(i) );
 
             dataList.add(myMap);
         }
-
-//        Log.i(TAG, "The length of data is: " + String.valueOf(count));
-//        Log.i(TAG,"");
 
         return dataList;
     }

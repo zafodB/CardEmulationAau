@@ -9,15 +9,13 @@
 
     <string name="card_thumb_description">Company logo</string>
 
-    <!-- In "Add new Card" activity -->
-    <string name="name_hint">Name</string>
-    <string name="id_hint">ID: 01234567</string>
-    <string name="add_card">Add card</string>
+    <!-- In "Create new Card" activity -->
+    <string name="name_hint">Card nickname</string>
+    <string name="add_card">Create card</string>
     <string name="spinner_prompt">Choose institution</string>
-    <string name="no_card_name_tst">Enter a name!</string>
-    <string name="name_too_long_tst">Card name is too long!</string>
-    <string name="no_card_number_tst">Enter a card number!</string>
-    <string name="number_too_long_tst">Card number is too long!</string>
+    <string name="no_card_name_tst">Enter a nick!</string>
+    <string name="name_too_long_tst">Card nick is too long!</string>
+    <string name="create_card_help_text">Choose a nickname for your card and institution you would like to access. \n\nYou will be transferred to a Login page.</string>
 
     <string-array name="spinner_items">
         <item>Aalborg University</item>
@@ -26,5 +24,10 @@
         <item>Other</item>
 
     </string-array>
+
+    <string name="no_id_tst">No account found. Open application and create an account.</string>
+
+    <string name="email_hint">E-mail</string>
+    <string name="create_acc_btn_txt">Sign Up</string>
 
 </resources>

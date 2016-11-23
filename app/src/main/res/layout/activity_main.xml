@@ -6,7 +6,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.filip.cardemulationaau.MainActivity">
+    tools:context="com.example.filip.cardemulationaau.ui_elements.MainActivity">
 
 
     <android.support.design.widget.FloatingActionButton
@@ -19,12 +19,26 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"/>
 
-    <fragment
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.filip.cardemulationaau.RecyclerViewFragment"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/fragment"/>
+        android:id="@+id/fragment_placeholder"/>
+
+    <!--<fragment-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="com.example.filip.cardemulationaau.ui_elements.RecyclerViewFragment"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/fragment"/>-->
+
+    <!--<fragment-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="com.example.filip.cardemulationaau.ui_elements.CreateAccFragment"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/fragment2"/>-->
 
 </RelativeLayout>
