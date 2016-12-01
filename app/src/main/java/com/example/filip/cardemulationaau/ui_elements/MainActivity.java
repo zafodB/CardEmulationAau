@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 
 import com.example.filip.cardemulationaau.ApplicationMain;
@@ -23,18 +24,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ApplicationMain mApplication = (ApplicationMain) getApplication();
-
-        if (mApplication.getId() == null) {
-            getFragmentManager().beginTransaction().add(R.id.fragment_placeholder, CreateAccFragment.newInstance()).commit();
-        } else {
-            getFragmentManager().beginTransaction().add(R.id.fragment_placeholder, RecyclerViewFragment.newInstance(), FRAGMENT_TAG)
-                    .commit();
-        }
-
         addCardButton = (FloatingActionButton) findViewById(R.id.fab);
 
-        addCardButton.setVisibility(View.INVISIBLE);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,15 +36,34 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume() {
+        ApplicationMain mApplication = (ApplicationMain) getApplication();
+
         RecyclerViewFragment fragment = (RecyclerViewFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG);
-        if (fragment != null) {
+
+        if (mApplication.getId() == null) {
+            getFragmentManager().beginTransaction().add(R.id.fragment_placeholder, CreateAccFragment.newInstance())
+                    .commit();
+            addCardButton.setVisibility(View.INVISIBLE);
+        } else if (mApplication.getToken() == null) {
+
+            Log.i(TAG, "Not implemented yet.");
+            //TODO login screen to be implemented here
+
+        } else if (fragment == null) {
+            getFragmentManager().beginTransaction().add(R.id.fragment_placeholder, RecyclerViewFragment.newInstance()
+                    , FRAGMENT_TAG)
+                    .commit();
+        } else {
             fragment.notifyAdapter();
+            Log.i(TAG, "Fragment notified");
         }
         super.onResume();
     }
 
-    void replaceFragments(){
-        getFragmentManager().beginTransaction().replace(R.id.fragment_placeholder,RecyclerViewFragment.newInstance()).commit();
+    void replaceFragments() {
+        getFragmentManager().beginTransaction().replace(R.id.fragment_placeholder, RecyclerViewFragment.newInstance()
+        ).commit();
+        addCardButton.setVisibility(View.VISIBLE);
     }
 
 }

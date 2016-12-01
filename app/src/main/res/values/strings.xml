@@ -28,6 +28,7 @@
     <string name="no_id_tst">No account found. Open application and create an account.</string>
 
     <string name="email_hint">E-mail</string>
+    <string name="pass_hint">Password</string>
     <string name="create_acc_btn_txt">Sign Up</string>
 
 </resources>

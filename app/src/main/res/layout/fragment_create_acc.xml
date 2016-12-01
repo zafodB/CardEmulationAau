@@ -11,26 +11,40 @@
         android:layout_centerInParent="true">
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
 
         android:gravity="center"
-        android:textSize="23dp"
+        android:textSize="20sp"
         android:inputType="textEmailAddress"
         android:ems="10"
 
         android:hint="@string/email_hint"
         android:id="@+id/create_acc_email"/>
 
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/create_acc_email"
+
+            android:gravity="center"
+            android:textSize="20sp"
+            android:inputType="textPassword"
+            android:ems="10"
+
+            android:hint="@string/pass_hint"
+            android:id="@+id/create_acc_pass"/>
+
     <Button
         android:text="@string/create_acc_btn_txt"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/create_acc_email"
+        android:layout_below="@+id/create_acc_pass"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="23dp"
         android:id="@+id/create_acc_btn"/>
     </RelativeLayout>

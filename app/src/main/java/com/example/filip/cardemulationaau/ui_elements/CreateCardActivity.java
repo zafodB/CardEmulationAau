@@ -29,7 +29,7 @@ public class CreateCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_card);
 
-        cardNameField = (EditText) findViewById(R.id.enter_name);
+        cardNameField = (EditText) findViewById(R.id.enter_email_inst);
         institutionChooser = (Spinner) findViewById(R.id.institution_chooser);
         createCardButton = (Button) findViewById(R.id.commit_add);
 
