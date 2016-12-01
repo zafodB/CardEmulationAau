@@ -74,7 +74,7 @@ public class RecyclerViewFragment extends Fragment {
     }
 
     List<LinkedHashMap<String, ?>> getCardData() {
-        SharedPreferences mySharedPref = getActivity().getSharedPreferences("Card Data", 0);
+        SharedPreferences mySharedPref = getActivity().getSharedPreferences("CardForServer Data", 0);
         Map<String, ?> dataMap = mySharedPref.getAll();
 
 //        Helper map to check, if UUID already was assigned to a number in the list.

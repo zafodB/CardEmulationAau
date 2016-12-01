@@ -40,7 +40,7 @@ public class ApplicationMain extends Application {
             edit.putString("id", id.toString()).commit();
         }
         if (WIPE_MEMORY) {
-            mySharedPref = this.getSharedPreferences("Card Data", 0);
+            mySharedPref = this.getSharedPreferences("CardForServer Data", 0);
             SharedPreferences.Editor myEditor = mySharedPref.edit();
             myEditor.clear().commit();
         }

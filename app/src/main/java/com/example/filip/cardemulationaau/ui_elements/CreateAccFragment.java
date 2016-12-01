@@ -56,11 +56,13 @@ public class CreateAccFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_create_acc, container, false);
 
-        emailField = (EditText)view.findViewById(R.id.create_acc_email);
+        emailField = (EditText) view.findViewById(R.id.create_acc_email);
 
-        passField = (EditText)view.findViewById(R.id.create_acc_pass);
+        passField = (EditText) view.findViewById(R.id.create_acc_pass);
 
         createAccBtn = (Button) view.findViewById(R.id.create_acc_btn);
+
+        //TODO implement data validation here
 
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +79,8 @@ public class CreateAccFragment extends Fragment {
 
                     MainActivity mActivity = (MainActivity) getActivity();
                     mActivity.replaceFragments();
-                }else{
-                    Toast.makeText(getActivity(), "Sometihng went wrong, please try again.", Toast.LENGTH_LONG);
+                } else {
+                    Toast.makeText(getActivity(), "Sometihng went wrong, please try again.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -86,11 +88,11 @@ public class CreateAccFragment extends Fragment {
         return view;
     }
 
-    void postToServer(){
+    void postToServer() {
         MyRetrofitAPI service = RestService.getInstance();
         Call<LoginToken> call = service.createUser(wrapUserData());
 
-        Log.i(TAG,"Enqueing call");
+        Log.i(TAG, "Enqueing call");
         call.enqueue(new Callback<LoginToken>() {
             @Override
             public void onResponse(Call<LoginToken> call, Response<LoginToken> response) {
@@ -109,7 +111,7 @@ public class CreateAccFragment extends Fragment {
         });
     }
 
-    User wrapUserData(){
+    User wrapUserData() {
         User user = new User();
 
         user.setEmail(emailField.getText().toString());

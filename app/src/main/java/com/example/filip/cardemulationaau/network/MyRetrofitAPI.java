@@ -1,7 +1,6 @@
 package com.example.filip.cardemulationaau.network;
 
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
@@ -18,4 +17,7 @@ public interface MyRetrofitAPI {
     Call<LoginToken> createUser(@Body User user);
 //    Call<ResponseBody> createUser(@Body User user);
 
+    @Headers("Content-Type:application/json")
+    @POST("/cards/verify")
+    Call<String> createCard(@Body CardForServer cardForServer);
 }

@@ -9,13 +9,13 @@
 
     <string name="card_thumb_description">Company logo</string>
 
-    <!-- In "Create new Card" activity -->
-    <string name="name_hint">Card nickname</string>
-    <string name="add_card">Create card</string>
+    <!-- In "Create new CardForServer" activity -->
+    <string name="email_inst_hint">Intitution email</string>
+    <string name="pin_hint">Enter PIN</string>
+    <string name="add_card">Create cardForServer</string>
     <string name="spinner_prompt">Choose institution</string>
-    <string name="no_card_name_tst">Enter a nick!</string>
-    <string name="name_too_long_tst">Card nick is too long!</string>
-    <string name="create_card_help_text">Choose a nickname for your card and institution you would like to access. \n\nYou will be transferred to a Login page.</string>
+    <string name="create_card_help_text">Enter email you use to log in with desired institution. \nE.g. work email address or student email.</string>
+    <string name="pin_help_text">Enter a PIN you received by your institution. \nIf you don\'t have one, please contact &lt;whomever&gt; </string>
 
     <string-array name="spinner_items">
         <item>Aalborg University</item>
@@ -26,7 +26,6 @@
     </string-array>
 
     <string name="no_id_tst">No account found. Open application and create an account.</string>
-
     <string name="email_hint">E-mail</string>
     <string name="pass_hint">Password</string>
     <string name="create_acc_btn_txt">Sign Up</string>
