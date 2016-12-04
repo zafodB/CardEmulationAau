@@ -1,8 +1,6 @@
 package com.example.filip.cardemulationaau.ui_elements;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,12 +8,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.filip.cardemulationaau.ApplicationMain;
+import com.example.filip.cardemulationaau.Constants;
 import com.example.filip.cardemulationaau.R;
 
 public class MainActivity extends Activity {
 
-    public static final String TAG = "myTag";
-    static final String FRAGMENT_TAG = "cardFragment";
+    private static final String FRAGMENT_TAG = "cardFragment";
 
     FloatingActionButton addCardButton;
 
@@ -44,18 +42,18 @@ public class MainActivity extends Activity {
             getFragmentManager().beginTransaction().add(R.id.fragment_placeholder, CreateAccFragment.newInstance())
                     .commit();
             addCardButton.setVisibility(View.INVISIBLE);
-        } else if (mApplication.getToken() == null) {
 
-            Log.i(TAG, "Not implemented yet.");
+        } else if (mApplication.getToken() == null) {
+            Log.i(Constants.TAG, "Not implemented yet.");
             //TODO login screen to be implemented here
 
         } else if (fragment == null) {
             getFragmentManager().beginTransaction().add(R.id.fragment_placeholder, RecyclerViewFragment.newInstance()
                     , FRAGMENT_TAG)
                     .commit();
+
         } else {
             fragment.notifyAdapter();
-            Log.i(TAG, "Fragment notified");
         }
         super.onResume();
     }

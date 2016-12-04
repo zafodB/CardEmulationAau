@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.filip.cardemulationaau.Constants;
 import com.example.filip.cardemulationaau.R;
 
 import java.util.ArrayList;
@@ -24,9 +25,6 @@ import java.util.Map;
 
 public class RecyclerViewFragment extends Fragment {
 
-    public static final String TAG = "myTag";
-
-    //    CardView mCardView;
     LinearLayoutManager mLayoutManager;
 
     CustomAdapter myAdapter;
@@ -34,7 +32,7 @@ public class RecyclerViewFragment extends Fragment {
 
     public static RecyclerViewFragment newInstance() {
         RecyclerViewFragment fragment = new RecyclerViewFragment();
-        Log.i(TAG, "fragment instance created");
+        Log.i(Constants.TAG, "fragment instance created");
         return fragment;
     }
 
@@ -74,7 +72,7 @@ public class RecyclerViewFragment extends Fragment {
     }
 
     List<LinkedHashMap<String, ?>> getCardData() {
-        SharedPreferences mySharedPref = getActivity().getSharedPreferences("CardForServer Data", 0);
+        SharedPreferences mySharedPref = getActivity().getSharedPreferences(Constants.MEMORY_CARDS_REF, 0);
         Map<String, ?> dataMap = mySharedPref.getAll();
 
 //        Helper map to check, if UUID already was assigned to a number in the list.

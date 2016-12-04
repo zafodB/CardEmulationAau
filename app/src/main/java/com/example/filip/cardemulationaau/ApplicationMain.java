@@ -2,9 +2,7 @@ package com.example.filip.cardemulationaau;
 
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,53 +11,44 @@ import java.util.UUID;
 
 public class ApplicationMain extends Application {
 
-    public static final String TAG = "myTag";
-
-    public static final String MEMORY_LOGIN_REF = "ID_storage";
-
-    public static final boolean WIPE_MEMORY = false;
-    public static final boolean CREATE_ID = false;
-    public static final boolean WIPE_ID = false;
-
-
     SharedPreferences mySharedPref;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mySharedPref = this.getSharedPreferences(MEMORY_LOGIN_REF,0);
+        mySharedPref = this.getSharedPreferences(Constants.MEMORY_LOGIN_REF, 0);
 
-        if (WIPE_ID){
+        //Testing purposes only BEGIN
+        if (Constants.WIPE_ID) {
             SharedPreferences.Editor edit = mySharedPref.edit();
             edit.clear().commit();
         }
-        if (CREATE_ID){
+        if (Constants.CREATE_ID) {
             SharedPreferences.Editor edit = mySharedPref.edit();
             UUID id = UUID.randomUUID();
             edit.putString("id", id.toString()).commit();
         }
-        if (WIPE_MEMORY) {
-            mySharedPref = this.getSharedPreferences("CardForServer Data", 0);
+        if (Constants.WIPE_MEMORY) {
+            mySharedPref = this.getSharedPreferences(Constants.MEMORY_CARDS_REF, 0);
             SharedPreferences.Editor myEditor = mySharedPref.edit();
             myEditor.clear().commit();
         }
+        //Testing purposes only END
 
     }
 
     public String getId() {
+        mySharedPref = this.getSharedPreferences(Constants.MEMORY_LOGIN_REF, 0);
 
-        mySharedPref = this.getSharedPreferences(MEMORY_LOGIN_REF,0);
-
-        Log.i(TAG, "Sending ID");
-        return mySharedPref.getString("user_id", null);
+        return mySharedPref.getString(Constants.MEMORY_USER_ID_REF, null);
     }
 
-    public String getToken(){
+    public String getToken() {
+        mySharedPref = this.getSharedPreferences(Constants.MEMORY_LOGIN_REF, 0);
 
-        mySharedPref = this.getSharedPreferences(MEMORY_LOGIN_REF,0);
-
-        Log.i(TAG, "Sending token.");
-        return mySharedPref.getString("token", null);
+        return mySharedPref.getString(Constants.MEMORY_TOKEN_REF, null);
     }
+
+
 }

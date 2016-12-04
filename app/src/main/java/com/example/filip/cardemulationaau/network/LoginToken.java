@@ -14,7 +14,6 @@ public class LoginToken {
 
     @SerializedName("token") private String token;
     @SerializedName("user_id") private String user_id;
-//    @SerializedName("_id") private String user_id;
 
     public String getToken() {
         return token;
