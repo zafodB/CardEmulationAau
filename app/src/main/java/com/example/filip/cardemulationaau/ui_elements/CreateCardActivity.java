@@ -1,5 +1,7 @@
 package com.example.filip.cardemulationaau.ui_elements;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.filip.cardemulationaau.ApplicationMain;
 import com.example.filip.cardemulationaau.Constants;
@@ -29,6 +32,7 @@ public class CreateCardActivity extends AppCompatActivity {
     EditText pinField;
     Spinner institutionChooser;
     Button createCardButton;
+    ProgressDialog dialog;
 
     CreateCardActivity thisInstance;
 
@@ -43,10 +47,13 @@ public class CreateCardActivity extends AppCompatActivity {
         createCardButton = (Button) findViewById(R.id.commit_add);
 
         thisInstance = this;
+        setUpLoadingDialog();
 
         createCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.show();
+                Log.i(Constants.TAG, "The dialog is: " + String.valueOf(dialog.isShowing()));
                 fetchInstitutionList();
 
                 String emailInst = emailField.getText().toString();
@@ -56,7 +63,6 @@ public class CreateCardActivity extends AppCompatActivity {
                 //TODO implement data validation here
 
                 ApplicationMain mApplication = (ApplicationMain) getApplication();
-
                 authenticateWithServer(mApplication.getToken(), institutionNumber, emailInst, pin);
             }
         });
@@ -72,17 +78,20 @@ public class CreateCardActivity extends AppCompatActivity {
      */
     private void authenticateWithServer(String token, final int institution, final String email, int pin) {
         MyRetrofitAPI service = RestService.getInstance();
-        Call<CardForUser> call = service.createCard(Constants.BEARER + token, wrapCardData(institution, email, pin));
+
+        //TODO remake so route is not hardcoded
+        Call<CardForUser> call = service.createCard(Constants.BEARER + token, "aau", wrapCardData(institution, email, pin));
 
         Log.i(Constants.TAG, "Enqueing call");
         call.enqueue(new Callback<CardForUser>() {
             @Override
             public void onResponse(Call<CardForUser> call, Response<CardForUser> response) {
-                int cardNumber = response.body().getCard_id();
+                String cardNumber = response.body().getCard_id();
 
                 saveCardsToMemory(email, institution, cardNumber);
                 Log.i(Constants.TAG, "Card number is: " + cardNumber);
 
+                dialog.hide();
                 finish();
             }
 
@@ -90,6 +99,10 @@ public class CreateCardActivity extends AppCompatActivity {
             public void onFailure(Call<CardForUser> call, Throwable t) {
                 Log.i(Constants.TAG, "Got negative response");
                 Log.i(Constants.TAG, "The error is: " + t.getMessage());
+
+                //TODO remove the fucking swear words
+                Toast.makeText(getApplicationContext(),"Server fucked-up", Toast.LENGTH_SHORT).show();
+                dialog.hide();
             }
         });
 
@@ -113,7 +126,7 @@ public class CreateCardActivity extends AppCompatActivity {
      * An unique ID is generated for triplet of data. Keys are generated using the unique ID and prefix h0 - h2. Data
      * are saved as corresponding values to this keys.
      */
-    void saveCardsToMemory(String email, int instNumber, int cardNumber) {
+    void saveCardsToMemory(String email, int instNumber, String cardNumber) {
         SharedPreferences mySharedPref = thisInstance.getSharedPreferences(Constants.MEMORY_CARDS_REF, 0);
         SharedPreferences.Editor myEditor = mySharedPref.edit();
 
@@ -124,7 +137,7 @@ public class CreateCardActivity extends AppCompatActivity {
         String keyInstitution = "h2" + uuid.toString();
 
         myEditor.putString(keyName, email);
-        myEditor.putString(keyNumber, String.valueOf(cardNumber));
+        myEditor.putString(keyNumber, cardNumber);
         myEditor.putString(keyInstitution, String.valueOf(instNumber));
 
         //TODO fix institutions' names (so they're not hardcoded)
@@ -144,4 +157,12 @@ public class CreateCardActivity extends AppCompatActivity {
         myEditor.commit();
     }
 
+    //Set up loading dialog
+    private void setUpLoadingDialog() {
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(getString(R.string.loading_msg));
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+    }
 }

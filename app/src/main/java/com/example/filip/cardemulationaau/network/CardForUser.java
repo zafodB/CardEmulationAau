@@ -14,13 +14,13 @@ import java.util.List;
 
 public class CardForUser {
 
-    @SerializedName("card_id")int card_id;
+    @SerializedName("card_id")String card_id;
 
-    public int getCard_id() {
+    public String getCard_id() {
         return card_id;
     }
 
-    public void setCard_id(int card_id) {
+    public void setCard_id(String card_id) {
         this.card_id = card_id;
     }
 }

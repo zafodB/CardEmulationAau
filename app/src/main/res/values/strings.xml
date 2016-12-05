@@ -29,5 +29,6 @@
     <string name="email_hint">E-mail</string>
     <string name="pass_hint">Password</string>
     <string name="create_acc_btn_txt">Sign Up</string>
+    <string name="loading_msg">Loading, please wait.</string>
 
 </resources>

@@ -15,5 +15,5 @@ public class Constants {
 
     public static final boolean WIPE_MEMORY = true;
     public static final boolean CREATE_ID = false;
-    public static final boolean WIPE_ID = false;
+    public static final boolean WIPE_ID = true;
 }

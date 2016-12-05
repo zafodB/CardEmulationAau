@@ -1,6 +1,7 @@
 package com.example.filip.cardemulationaau.ui_elements;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,6 +38,7 @@ public class CreateAccFragment extends Fragment {
     Button createAccBtn;
     String token;
     String userID;
+    ProgressDialog dialog;
 
     public static CreateAccFragment newInstance() {
         CreateAccFragment fragment = new CreateAccFragment();
@@ -55,10 +57,9 @@ public class CreateAccFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_acc, container, false);
 
         emailField = (EditText) view.findViewById(R.id.create_acc_email);
-
         passField = (EditText) view.findViewById(R.id.create_acc_pass);
-
         createAccBtn = (Button) view.findViewById(R.id.create_acc_btn);
+        setUpLoadingDialog();
 
         //TODO implement data validation here
         //TODO work on the UI little-bit (make it prettier)
@@ -66,6 +67,7 @@ public class CreateAccFragment extends Fragment {
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.show();
                 authenticateWithServer();
             }
         });
@@ -92,11 +94,13 @@ public class CreateAccFragment extends Fragment {
                 Log.i(TAG, "user ID is: " + userID);
 
                 saveData();
+                dialog.hide();
             }
 
             @Override
             public void onFailure(Call<LoginToken> call, Throwable t) {
                 Log.i(TAG, "Got negative response");
+                dialog.hide();
                 Toast.makeText(getActivity(), "Something went wrong, please try again.", Toast.LENGTH_LONG).show();
 
             }
@@ -138,7 +142,19 @@ public class CreateAccFragment extends Fragment {
      * Updates UI and calls to change fragments.
      */
     void updateUI() {
+        dialog.hide();
         MainActivity mActivity = (MainActivity) getActivity();
         mActivity.replaceFragments();
+    }
+
+    /**
+     * Sets up proparties of a loading dialog that is displayed while communicating with server.
+     */
+    private void setUpLoadingDialog() {
+        dialog = new ProgressDialog(getActivity());
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage(getString(R.string.loading_msg));
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
     }
 }
