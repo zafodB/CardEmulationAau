@@ -19,26 +19,29 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"/>
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_placeholder"/>
 
-    <!--<fragment-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:name="com.example.filip.cardemulationaau.ui_elements.RecyclerViewFragment"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:id="@+id/fragment"/>-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
-    <!--<fragment-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:name="com.example.filip.cardemulationaau.ui_elements.CreateAccFragment"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:id="@+id/fragment2"/>-->
+        <TextView
+            android:id="@+id/no_card_hint_view"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:visibility="gone"
+
+            android:text="@string/no_card_hint"
+            android:textSize="20sp"
+
+            />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,7 @@ import static com.example.filip.cardemulationaau.Constants.TAG;
 
 public class CreateAccFragment extends Fragment {
 
-    EditText emailField;
-    EditText passField;
-    Button createAccBtn;
+
     String token;
     String userID;
     ProgressDialog dialog;
@@ -56,19 +55,20 @@ public class CreateAccFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_create_acc, container, false);
 
-        emailField = (EditText) view.findViewById(R.id.create_acc_email);
-        passField = (EditText) view.findViewById(R.id.create_acc_pass);
-        createAccBtn = (Button) view.findViewById(R.id.create_acc_btn);
+        final EditText emailField = (EditText) view.findViewById(R.id.create_acc_email);
+        final EditText passField = (EditText) view.findViewById(R.id.create_acc_pass);
+        Button createAccBtn = (Button) view.findViewById(R.id.create_acc_btn);
         setUpLoadingDialog();
-
-        //TODO implement data validation here
-        //TODO work on the UI little-bit (make it prettier)
 
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
-                authenticateWithServer();
+                if (validateData(emailField.getText().toString(), passField.getText().toString())) {
+                    dialog.show();
+                    authenticateWithServer(emailField.getText().toString(), passField.getText().toString());
+                } else {
+                    Log.i(Constants.TAG, "User entered invalid data.");
+                }
             }
         });
 
@@ -78,9 +78,9 @@ public class CreateAccFragment extends Fragment {
     /**
      * Sends the user entered data into server. Expects login token as a response.
      */
-    void authenticateWithServer() {
+    void authenticateWithServer(String email, String password) {
         MyRetrofitAPI service = RestService.getInstance();
-        Call<LoginToken> call = service.createUser(wrapUserData());
+        Call<LoginToken> call = service.createUser(wrapUserData(email, password));
 
         Log.i(TAG, "Enqueing call");
         call.enqueue(new Callback<LoginToken>() {
@@ -108,13 +108,13 @@ public class CreateAccFragment extends Fragment {
     }
 
     /**
-     * Prepares data into the User class, used by GSON convereter.
+     * Prepares data into the User class, used by GSON converter.
      */
-    User wrapUserData() {
+    User wrapUserData(String email, String password) {
         User user = new User();
 
-        user.setEmail(emailField.getText().toString());
-        user.setPassword(passField.getText().toString());
+        user.setEmail(email);
+        user.setPassword(password);
         Log.i(TAG, "wrapped data");
 
         return user;
@@ -145,6 +145,38 @@ public class CreateAccFragment extends Fragment {
         dialog.hide();
         MainActivity mActivity = (MainActivity) getActivity();
         mActivity.replaceFragments();
+    }
+
+    /**
+     * Simple method used for validation of user-entered data. In case some data is not valid, explanatory toast is
+     * shown.
+     *
+     * @param email    email entered by user into textEdit field
+     * @param password password entered by user into textEdit field
+     * @return False, if any of the conditions is broken. True otherwise.
+     */
+    boolean validateData(String email, String password) {
+        if (email.isEmpty()) {
+            Toast.makeText(getActivity(), getString(R.string.tst_email_empty), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (email.length() > 80) {
+            Toast.makeText(getActivity(), getString(R.string.tst_email_long), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getActivity(), getString(R.string.tst_email_invalid), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (password.isEmpty()) {
+            Toast.makeText(getActivity(), getString(R.string.tst_pass_empty), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (password.length() < 5) {
+            Toast.makeText(getActivity(), getString(R.string.tst_pass_short), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (password.length() > 50) {
+            Toast.makeText(getActivity(), getString(R.string.tst_pass_long), Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

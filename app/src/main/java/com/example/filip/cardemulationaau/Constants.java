@@ -13,7 +13,11 @@ public class Constants {
     public static final String MEMORY_USER_ID_REF = "user_id";
     public static final String BEARER = "Bearer ";
 
-    public static final boolean WIPE_MEMORY = true;
+    public static final boolean WIPE_MEMORY = false;
+    public static final boolean WIPE_ID = false;
+
     public static final boolean CREATE_ID = false;
-    public static final boolean WIPE_ID = true;
+
+    public static final String RV_FRAGMENT_TAG = "cardFragment";
+    public static final String CA_FRAGMENT_TAG = "createAccFragment";
 }

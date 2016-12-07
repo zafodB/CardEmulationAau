@@ -19,7 +19,7 @@ public class ApplicationMain extends Application {
 
         mySharedPref = this.getSharedPreferences(Constants.MEMORY_LOGIN_REF, 0);
 
-        //Testing purposes only BEGIN
+        /* Following if conditions are for testing purposes only */
         if (Constants.WIPE_ID) {
             SharedPreferences.Editor edit = mySharedPref.edit();
             edit.clear().commit();
@@ -34,21 +34,26 @@ public class ApplicationMain extends Application {
             SharedPreferences.Editor myEditor = mySharedPref.edit();
             myEditor.clear().commit();
         }
-        //Testing purposes only END
-
     }
 
+    /**
+     *  Reads ID from SharedPreferences memory.
+     * @return ID returned as String. If no ID is found, returns null.
+     */
     public String getId() {
         mySharedPref = this.getSharedPreferences(Constants.MEMORY_LOGIN_REF, 0);
 
         return mySharedPref.getString(Constants.MEMORY_USER_ID_REF, null);
     }
 
+    /**
+     *  Reads Token from SharedPreferences memory.
+     * @return Token returned as String. If no Token is found, returns null.
+     */
     public String getToken() {
         mySharedPref = this.getSharedPreferences(Constants.MEMORY_LOGIN_REF, 0);
 
         return mySharedPref.getString(Constants.MEMORY_TOKEN_REF, null);
     }
-
 
 }

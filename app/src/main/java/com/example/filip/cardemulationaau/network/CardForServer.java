@@ -11,24 +11,14 @@ public class CardForServer {
     @SerializedName("email") String email;
     @SerializedName("pin") int pin;
 
-    public String getEmail() {
-        return email;
-    }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public int getPin() {
-        return pin;
-    }
 
     public void setPin(int pin) {
         this.pin = pin;
-    }
-
-    public int getInstitution() {
-        return institution;
     }
 
     public void setInstitution(int institution) {

@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            >
+
+            <ImageView
+                android:id="@+id/logo"
+
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:adjustViewBounds="true"
+
+                android:background="@drawable/vimfologo2"/>
+
+            <TextView
+                android:id="@+id/company_name_view"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/logo"
+                android:layout_marginLeft="10dp"
+
+                android:text="@string/company_name"
+                android:textColor="@color/colorDarkDark"
+                android:textSize="26sp"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
     <RelativeLayout
@@ -10,42 +50,42 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_centerHorizontal="true"
-
-        android:gravity="center"
-        android:textSize="20sp"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-
-        android:hint="@string/email_hint"
-        android:id="@+id/create_acc_email"/>
-
         <EditText
+            android:id="@+id/create_acc_email"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/create_acc_email"
 
-            android:gravity="center"
-            android:textSize="20sp"
-            android:inputType="textPassword"
+            android:layout_marginBottom="20dp"
             android:ems="10"
+            android:gravity="center"
+            android:hint="@string/email_hint"
 
+            android:inputType="textEmailAddress"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/create_acc_pass"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/create_acc_email"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:gravity="center"
             android:hint="@string/pass_hint"
-            android:id="@+id/create_acc_pass"/>
 
-    <Button
-        android:text="@string/create_acc_btn_txt"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_acc_pass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="23dp"
-        android:id="@+id/create_acc_btn"/>
+            android:inputType="textPassword"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/create_acc_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/create_acc_pass"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="23dp"
+            android:text="@string/create_acc_btn_txt"/>
     </RelativeLayout>
 </RelativeLayout>

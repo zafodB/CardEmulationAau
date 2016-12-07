@@ -8,7 +8,9 @@
         android:id="@+id/rec_view_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_default"/>
+        android:background="@color/background_default">
+
+    </android.support.v7.widget.RecyclerView>
 
 
 </FrameLayout>

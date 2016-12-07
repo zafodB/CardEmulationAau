@@ -1,21 +1,15 @@
 package com.example.filip.cardemulationaau;
 
-import android.app.Application;
 import android.nfc.cardemulation.HostApduService;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.nio.ByteBuffer;
-
 public class CardService extends HostApduService {
-
-    public static final String TAG = "myTag";
-
 
     @Override
     public byte[] processCommandApdu(byte[] commandApdu, Bundle extras) {
-        Log.i(TAG, "Command processed.");
+        Log.i(Constants.TAG, "Command processed.");
 
         ApplicationMain mApplication = (ApplicationMain) getApplication();
         String userID = mApplication.getId();
@@ -30,9 +24,5 @@ public class CardService extends HostApduService {
     }
 
     @Override
-    public void onDeactivated(int reason) {
-
-    }
-
-
+    public void onDeactivated(int reason) {  }
 }

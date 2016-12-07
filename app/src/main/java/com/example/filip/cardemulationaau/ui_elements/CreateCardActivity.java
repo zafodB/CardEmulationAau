@@ -1,11 +1,11 @@
 package com.example.filip.cardemulationaau.ui_elements;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,7 +52,6 @@ public class CreateCardActivity extends AppCompatActivity {
         createCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
                 Log.i(Constants.TAG, "The dialog is: " + String.valueOf(dialog.isShowing()));
                 fetchInstitutionList();
 
@@ -60,10 +59,13 @@ public class CreateCardActivity extends AppCompatActivity {
                 int pin = Integer.parseInt(pinField.getText().toString());
                 int institutionNumber = institutionChooser.getSelectedItemPosition();
 
-                //TODO implement data validation here
-
-                ApplicationMain mApplication = (ApplicationMain) getApplication();
-                authenticateWithServer(mApplication.getToken(), institutionNumber, emailInst, pin);
+                if (validateData(emailInst)) {
+                    dialog.show();
+                    ApplicationMain mApplication = (ApplicationMain) getApplication();
+                    authenticateWithServer(mApplication.getToken(), institutionNumber, emailInst, pin);
+                } else {
+                    Log.i(Constants.TAG, "User entered invalid data.");
+                }
             }
         });
     }
@@ -80,9 +82,9 @@ public class CreateCardActivity extends AppCompatActivity {
         MyRetrofitAPI service = RestService.getInstance();
 
         //TODO remake so route is not hardcoded
-        Call<CardForUser> call = service.createCard(Constants.BEARER + token, "aau", wrapCardData(institution, email, pin));
+        Call<CardForUser> call = service.createCard(Constants.BEARER + token, "aau", wrapCardData(institution, email,
+                pin));
 
-        Log.i(Constants.TAG, "Enqueing call");
         call.enqueue(new Callback<CardForUser>() {
             @Override
             public void onResponse(Call<CardForUser> call, Response<CardForUser> response) {
@@ -100,8 +102,7 @@ public class CreateCardActivity extends AppCompatActivity {
                 Log.i(Constants.TAG, "Got negative response");
                 Log.i(Constants.TAG, "The error is: " + t.getMessage());
 
-                //TODO remove the fucking swear words
-                Toast.makeText(getApplicationContext(),"Server fucked-up", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.tst_server_error), Toast.LENGTH_SHORT).show();
                 dialog.hide();
             }
         });
@@ -157,12 +158,33 @@ public class CreateCardActivity extends AppCompatActivity {
         myEditor.commit();
     }
 
-    //Set up loading dialog
+    /**
+     * Sets up properties of Loading dialog that is displayed while communication with server is ongoing.
+     */
     private void setUpLoadingDialog() {
         dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage(getString(R.string.loading_msg));
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
+    }
+
+    /**
+     * Simple method to validate, whether user-entered data are in proper format.
+     * @param email Email entered by user
+     * @return False, if any property is broken, true otherwise.
+     */
+    boolean validateData(String email) {
+        if (email.isEmpty()) {
+            Toast.makeText(getApplication(), getString(R.string.tst_email_empty), Toast.LENGTH_LONG).show();
+            return false;
+        } else if (email.length() > 80) {
+            Toast.makeText(getApplication(), getString(R.string.tst_email_long), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getApplication(), getString(R.string.tst_email_invalid), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }
