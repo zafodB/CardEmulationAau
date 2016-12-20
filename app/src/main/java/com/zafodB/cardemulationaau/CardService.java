@@ -1,4 +1,4 @@
-package com.example.filip.cardemulationaau;
+package com.zafodB.cardemulationaau;
 
 import android.nfc.cardemulation.HostApduService;
 import android.os.Bundle;

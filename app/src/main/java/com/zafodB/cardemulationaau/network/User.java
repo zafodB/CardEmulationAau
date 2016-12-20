@@ -1,4 +1,4 @@
-package com.example.filip.cardemulationaau.network;
+package com.zafodB.cardemulationaau.network;
 
 import com.google.gson.annotations.SerializedName;
 

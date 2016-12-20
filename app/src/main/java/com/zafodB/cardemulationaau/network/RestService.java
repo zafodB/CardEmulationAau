@@ -1,4 +1,4 @@
-package com.example.filip.cardemulationaau.network;
+package com.zafodB.cardemulationaau.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

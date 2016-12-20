@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.filip.cardemulationaau.ui_elements.CreateCardActivity">
+    tools:context="com.example.zafodB.cardemulationaau.ui_elements.CreateCardActivity">
 
     <Spinner
         android:id="@+id/institution_chooser"

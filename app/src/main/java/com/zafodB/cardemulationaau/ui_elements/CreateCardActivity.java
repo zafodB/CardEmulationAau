@@ -1,4 +1,4 @@
-package com.example.filip.cardemulationaau.ui_elements;
+package com.zafodB.cardemulationaau.ui_elements;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -12,13 +12,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.filip.cardemulationaau.ApplicationMain;
-import com.example.filip.cardemulationaau.Constants;
-import com.example.filip.cardemulationaau.R;
-import com.example.filip.cardemulationaau.network.CardForServer;
-import com.example.filip.cardemulationaau.network.CardForUser;
-import com.example.filip.cardemulationaau.network.MyRetrofitAPI;
-import com.example.filip.cardemulationaau.network.RestService;
+import com.zafodB.cardemulationaau.ApplicationMain;
+import com.zafodB.cardemulationaau.Constants;
+import com.zafodB.cardemulationaau.R;
+import com.zafodB.cardemulationaau.network.CardForServer;
+import com.zafodB.cardemulationaau.network.CardForUser;
+import com.zafodB.cardemulationaau.network.MyRetrofitAPI;
+import com.zafodB.cardemulationaau.network.RestService;
 
 import java.util.UUID;
 

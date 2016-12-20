@@ -6,7 +6,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.filip.cardemulationaau.ui_elements.MainActivity">
+    tools:context="com.example.zafodB.cardemulationaau.ui_elements.MainActivity">
 
 
     <android.support.design.widget.FloatingActionButton

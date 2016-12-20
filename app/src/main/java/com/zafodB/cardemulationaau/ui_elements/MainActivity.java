@@ -1,4 +1,4 @@
-package com.example.filip.cardemulationaau.ui_elements;
+package com.zafodB.cardemulationaau.ui_elements;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,11 +7,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 
-import com.example.filip.cardemulationaau.ApplicationMain;
-import com.example.filip.cardemulationaau.Constants;
-import com.example.filip.cardemulationaau.R;
 
-import static com.example.filip.cardemulationaau.Constants.*;
+import com.zafodB.cardemulationaau.ApplicationMain;
+import com.zafodB.cardemulationaau.Constants;
+import com.zafodB.cardemulationaau.R;
+
+import static com.zafodB.cardemulationaau.Constants.*;
 
 public class MainActivity extends Activity {
 
