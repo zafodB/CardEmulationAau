@@ -41,5 +41,7 @@
     <string name="card_name_desc_txt">User name:</string>
     <string name="card_id_desc_txt">Card number:</string>
 
+    <string name="card_added_tst">Card has been added. YOU\'RE READY TO GO!</string>
+
 
 </resources>

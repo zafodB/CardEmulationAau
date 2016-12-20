@@ -1,0 +1,27 @@
+@startuml
+
+'left to right direction
+package "Some Group" {
+[User card] - NFC
+[User Phone] -- NFC
+[User Phone] -- HTTP
+NFC - [Reader]
+
+[Reader] - HTTP
+HTTP - [Server]
+[Server] - [Database]
+
+
+}
+
+cloud "Server"{
+
+}
+
+database "Database"{
+    frame "Own user database"
+    frame "Institution database"
+    frame "Other / external databases"
+}
+
+@enduml

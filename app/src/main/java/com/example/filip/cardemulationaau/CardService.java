@@ -20,7 +20,6 @@ public class CardService extends HostApduService {
         }
 
         return userID.getBytes();
-
     }
 
     @Override

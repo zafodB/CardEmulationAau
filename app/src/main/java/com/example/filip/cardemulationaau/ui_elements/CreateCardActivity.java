@@ -95,6 +95,7 @@ public class CreateCardActivity extends AppCompatActivity {
 
                 dialog.hide();
                 finish();
+                Toast.makeText(getApplication(), getString(R.string.card_added_tst), Toast.LENGTH_LONG).show();
             }
 
             @Override

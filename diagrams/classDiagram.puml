@@ -1,0 +1,154 @@
+@startuml
+
+left to right direction
+
+package cardemulationaau{
+package network{
+
+
+class CardForServer {
+int institution;
+String email;
+int pin;
++ void setEmail(String);
++ void setPin(int);
++ void setInstitution(int);
+}
+
+class CardForUser{
+String card_id;
++ String getCard_id();
+}
+
+class LoginToken{
+- String token;
+- String user_id;
++ String getToken();
++ String getUser_id();
+}
+
+class User{
+- String email;
+- String password;
++ void setEmail(String);
++ void setPassword(String);
+}
+
+class RestService {
++ {static} String SERVER_URL;
++ {static} MyRetrofitAPI myService;
+
++ {static} MyRetrofitAPI getInstance();
+}
+
+interface MyRetrofitAPI{
+Call<LoginToken> createUser(User);
+Call<CardForUser> createCard\n   (String, String, CardForServer)
+}
+
+}
+
+package ui_elements {
+class CreateAccFragment{
+String token;
+String userID;
+ProgressDialog dialog;
++ {static} CreateAccFragment newInstance()
++ CreateAccFragment()
++ View onCreateView(LayoutInflater, ViewGroup, Bundle);
+void authenticateWithServer(String, String);
+User wrapUserData(String, String);
+void saveData();
+void updateUI();
+boolean validateData(String, String)
+- void setUpLoadingDialog();
+}
+
+class CreateCardActivity{
+EditText emailField;
+EditText pinField;
+Spinner institutionChooser;
+Button createCardButton;
+ProgressDialog dialog;
+CreateCardActivity thisInstance;
+# void onCreate(Bundle);
+- void authenticateWithServer(String, int, String, int);
+CardForServer wrapCardData(int, String, int);
+void saveCardsToMemory(String, int, String);
+- void fetchInstitutionList();
+- void setUpLoadingDialog();
+boolean validateData(String);
+}
+
+class MainActivity {
+FloatingActionButton addCardButton;
+# void onCreate(Bundle);
+# void onResume();
+void replaceFragments();
+}
+
+class RecyclerViewFragment{
+LinearLayoutManager mLayoutManager;
+CustomAdapter myAdapter;
+RecyclerView mRecyclerView;
+TextView mTextView;
+
++ {static} RecyclerViewFragment newInstance();
++ RecyclerViewFragment();
+
++ View onCreateView(LayoutInflater, ViewGroup, Bundle);
++ void notifyAdapter();
+List<LinkedHashMap<String,?>> getCardData();
+void updateHintVisibility(boolean);
+}
+
+class CustomAdapter{
+TextView cardName;
+TextView cardId;
+ImageView cardThumb;
+MyViewHolder mViewHolder;
+List<LinkedHashMap<String, ?>> listOfData;
+LinkedHashMap<String,?> tempMap;
+
++ CustomAdapter (List<LinkedHashMap<String,?>>;
++ MyViewHolder onCreateViewHolder(ViewGroup, int);
++ void onBindViewHolder(MyViewHolder, int);
++ int getItemCount();
+void putCardData(List<LinkedHashMap<String, ?>>);
+}
+
+class MyViewHolder{
+ MyViewHolder(View);
+}
+
+}
+
+class ApplicationMain {
+SharedPreferences mySharedPref;
++ void onCreate();
++ String getId();
++ String getToken();
+}
+
+class CardService{
+
++ byte[ ] processCommandApdu(byte[ ], Bundle);
++ void onDeactivated(int);
+}
+
+class Constants {
++ {static} String TAG;
++ {static} String MEMORY_LOGIN_REF;
++ {static} String MEMORY_CARDS_REF;
++ {static} String MEMORY_TOKEN_REF;
++ {static} String MEMORY_USER_ID_REF;
++ {static} String BEARER;
++ {static} boolean WIPE_MEMORY;
++ {static} boolean WIPE_ID;
++ {static} boolean CREATE_ID;
++ {static} String RV_FRAGMENT_TAG;
++ {static} String CA_FRAGMENT_TAG;
+}
+}
+
+@enduml

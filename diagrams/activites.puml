@@ -1,0 +1,14 @@
+@startuml
+
+package "User interface" {
+rectangle "Create card Activity"
+
+rectangle "Main activity" as CA1
+cloud "Create account Fragment" as CAF
+cloud "Recycler View Fragment" as RVF
+CA1 --> CAF
+CA1 -> RVF
+note right of RVF : The overview of all the cards user\nhas added to their account.
+}
+
+@enduml

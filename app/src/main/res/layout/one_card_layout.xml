@@ -74,7 +74,7 @@
                 android:id="@+id/card_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_margin="0dp"
                 android:contentDescription="@string/card_thumb_description"
                 android:src="@drawable/aau_logo_2012"/>
 
